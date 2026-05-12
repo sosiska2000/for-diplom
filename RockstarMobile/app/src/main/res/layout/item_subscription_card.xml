@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Название абонемента -->
+        <TextView
+            android:id="@+id/tvSubscriptionName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Абонемент"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#2C2C2E"/>
+
+        <!-- Направление -->
+        <TextView
+            android:id="@+id/tvDirectionName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Направление"
+            android:textSize="14sp"
+            android:textColor="#FF4D00"
+            android:layout_marginTop="4dp"/>
+
+        <!-- Цена -->
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 ₽"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#2C2C2E"
+            android:layout_marginTop="8dp"/>
+
+        <!-- 👇 ДАТА ОКОНЧАНИЯ -->
+        <TextView
+            android:id="@+id/tvExpiryDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Действует до: —"
+            android:textSize="13sp"
+            android:textColor="#666666"
+            android:layout_marginTop="4dp"/>
+
+        <!-- 👇 ДНЕЙ ОСТАЛОСЬ -->
+        <TextView
+            android:id="@+id/tvDaysLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Осталось 365 дней"
+            android:textSize="12sp"
+            android:textColor="#4CAF50"
+            android:layout_marginTop="2dp"
+            android:visibility="gone"/>
+
+        <!-- Прогресс бар -->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_marginTop="12dp"
+            android:progressTint="#FF4D00"
+            android:max="100"/>
+
+        <!-- Использовано и осталось -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:id="@+id/tvUsed"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Использовано: 0/0"
+                android:textSize="12sp"
+                android:textColor="#666666"/>
+
+            <TextView
+                android:id="@+id/tvRemaining"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Осталось: 0"
+                android:textSize="12sp"
+                android:textColor="#4CAF50"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <!-- Статус -->
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Активен"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"/>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

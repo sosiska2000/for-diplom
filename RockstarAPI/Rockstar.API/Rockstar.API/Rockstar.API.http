@@ -1,0 +1,6 @@
+@Rockstar.API_HostAddress = http://localhost:5143
+
+GET {{Rockstar.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
