@@ -43,18 +43,25 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
     public void onBindViewHolder(@NonNull ScheduleViewHolder holder, int position) {
         Schedule schedule = schedules.get(position);
 
+        // Устанавливаем время начала и окончания
+        holder.tvStartTime.setText(schedule.getStartTime());
+        holder.tvEndTime.setText(schedule.getEndTime());
+
         holder.tvDirection.setText(schedule.getDirectionName());
         holder.tvService.setText(schedule.getServiceName());
         holder.tvTrainer.setText(schedule.getTrainerName());
 
-        // Исправление: не конкатенируем строки напрямую, используем форматирование
-        String timeText = schedule.getDateDisplay() + " " + schedule.getTimeRange();
-        holder.tvTime.setText(timeText);
+        // Форматируем дату
+        holder.tvDate.setText(schedule.getFormattedDate());
 
         holder.tvPrice.setText(schedule.getPriceDisplay());
         holder.tvParticipants.setText(schedule.getParticipantsDisplay());
 
-        holder.itemView.setOnClickListener(v -> listener.onItemClick(schedule));
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onItemClick(schedule);
+            }
+        });
 
         // Если мест нет, показываем другим цветом
         if (!schedule.isAvailable()) {
@@ -71,15 +78,18 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
 
     public static class ScheduleViewHolder extends RecyclerView.ViewHolder {
         public CardView cardView;
-        public TextView tvDirection, tvService, tvTrainer, tvTime, tvPrice, tvParticipants;
+        public TextView tvStartTime, tvEndTime;
+        public TextView tvDirection, tvService, tvTrainer, tvDate, tvPrice, tvParticipants;
 
         public ScheduleViewHolder(@NonNull View itemView) {
             super(itemView);
             cardView = itemView.findViewById(R.id.cardView);
+            tvStartTime = itemView.findViewById(R.id.tvStartTime);
+            tvEndTime = itemView.findViewById(R.id.tvEndTime);
             tvDirection = itemView.findViewById(R.id.tvDirection);
             tvService = itemView.findViewById(R.id.tvService);
             tvTrainer = itemView.findViewById(R.id.tvTrainer);
-            tvTime = itemView.findViewById(R.id.tvTime);
+            tvDate = itemView.findViewById(R.id.tvDate);
             tvPrice = itemView.findViewById(R.id.tvPrice);
             tvParticipants = itemView.findViewById(R.id.tvParticipants);
         }

@@ -1,28 +1,34 @@
 package com.example.rockstarmobile.activities;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.rockstarmobile.R;
 import com.example.rockstarmobile.models.User;
+import com.example.rockstarmobile.utils.ReminderScheduler;
 import com.example.rockstarmobile.utils.SessionManager;
 
 public class MainActivity extends AppCompatActivity {
 
-    private CardView cardYoga, cardFitness, cardClimbing, cardSchedule, cardTrainers, cardProfile;
+    private CardView cardCatalog, cardSchedule, cardTrainers, cardProfile;
     private Button btnLogout;
     private TextView tvWelcome;
 
     private SessionManager sessionManager;
     private User currentUser;
+
+    private static final int NOTIFICATION_PERMISSION_REQUEST_CODE = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,20 +38,44 @@ public class MainActivity extends AppCompatActivity {
         sessionManager = new SessionManager(this);
         currentUser = sessionManager.getUser();
 
+        // Запрашиваем разрешение на уведомления для Android 13+
+        requestNotificationPermission();
+
+        // Запускаем планировщик напоминаний
+        ReminderScheduler.scheduleReminders(this);
+
         initViews();
         setupListeners();
         setupUserInfo();
+    }
+
+    private void requestNotificationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, 100);
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(
+                        this,
+                        new String[]{Manifest.permission.POST_NOTIFICATIONS},
+                        NOTIFICATION_PERMISSION_REQUEST_CODE
+                );
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == NOTIFICATION_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Разрешение получено
+            } else {
+                // Разрешение не получено - уведомления не будут работать
             }
         }
     }
 
     private void initViews() {
-        cardYoga = findViewById(R.id.cardYoga);
-        cardFitness = findViewById(R.id.cardFitness);
-        cardClimbing = findViewById(R.id.cardClimbing);
+        cardCatalog = findViewById(R.id.cardCatalog);
         cardSchedule = findViewById(R.id.cardSchedule);
         cardTrainers = findViewById(R.id.cardTrainers);
         cardProfile = findViewById(R.id.cardProfile);
@@ -54,9 +84,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupListeners() {
-        cardYoga.setOnClickListener(v -> openDirection("yoga"));
-        cardFitness.setOnClickListener(v -> openDirection("fitness"));
-        cardClimbing.setOnClickListener(v -> openDirection("climbing"));
+        cardCatalog.setOnClickListener(v -> openCatalog());
         cardSchedule.setOnClickListener(v -> openSchedule());
         cardTrainers.setOnClickListener(v -> openTrainers());
         cardProfile.setOnClickListener(v -> openProfile());
@@ -71,9 +99,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void openDirection(String directionKey) {
-        Intent intent = new Intent(MainActivity.this, DirectionActivity.class);
-        intent.putExtra("direction_key", directionKey);
+    private void openCatalog() {
+        Intent intent = new Intent(MainActivity.this, CatalogActivity.class);
         startActivity(intent);
     }
 
@@ -93,6 +120,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void logout() {
+        // Отменяем напоминания при выходе
+        ReminderScheduler.cancelReminders(this);
+
         sessionManager.logout();
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

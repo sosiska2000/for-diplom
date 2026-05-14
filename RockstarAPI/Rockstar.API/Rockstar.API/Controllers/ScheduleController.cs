@@ -379,20 +379,19 @@ namespace Rockstar.API.Controllers
                     .Include(e => e.User)
                     .Where(e => e.ScheduleId == id)
                     .OrderBy(e => e.EnrolledAt)
+                    .Select(e => new EnrollmentDto
+                    {
+                        Id = e.Id,
+                        UserId = e.UserId,
+                        UserName = e.User != null ? $"{e.User.FirstName} {e.User.LastName}" : "Пользователь не найден",
+                        UserEmail = e.User != null ? e.User.Email : "",
+                        ScheduleId = e.ScheduleId,
+                        EnrolledAt = e.EnrolledAt,
+                        Status = e.Status
+                    })
                     .ToListAsync();
 
-                var enrollmentDtos = enrollments.Select(e => new EnrollmentDto
-                {
-                    Id = e.Id,
-                    UserId = e.UserId,
-                    UserName = e.User != null ? $"{e.User.FirstName} {e.User.LastName}" : "",
-                    UserEmail = e.User?.Email ?? "",
-                    ScheduleId = e.ScheduleId,
-                    EnrolledAt = e.EnrolledAt,
-                    Status = e.Status
-                }).ToList();
-
-                return Ok(enrollmentDtos);
+                return Ok(enrollments);
             }
             catch (Exception ex)
             {
@@ -781,9 +780,54 @@ namespace Rockstar.API.Controllers
                 return StatusCode(500, "Внутренняя ошибка сервера");
             }
         }
-
         /// <summary>
-        /// Удалить занятие (только для админа)
+        /// Получить ID занятий, которые были удалены после последней проверки
+        /// </summary>
+        [HttpGet("deleted-schedule-ids")]
+        [Authorize]
+        [ProducesResponseType(typeof(List<int>), 200)]
+        public async Task<IActionResult> GetDeletedScheduleIds([FromQuery] long lastChecked)
+        {
+            try
+            {
+                var userId = GetCurrentUserId();
+                if (userId == null)
+                    return Unauthorized();
+
+                var lastCheckDate = DateTimeOffset.FromUnixTimeMilliseconds(lastChecked).UtcDateTime;
+
+                // Находим записи, которые были удалены (у которых нет schedule в БД)
+                var userEnrollments = await _context.Enrollments
+                    .Where(e => e.UserId == userId && e.Status == "enrolled")
+                    .Select(e => e.ScheduleId)
+                    .ToListAsync();
+
+                // Проверяем, какие из этих занятий ещё существуют
+                var existingScheduleIds = await _context.Schedules
+                    .Where(s => userEnrollments.Contains(s.Id))
+                    .Select(s => s.Id)
+                    .ToListAsync();
+
+                var deletedIds = userEnrollments.Except(existingScheduleIds).ToList();
+
+                // Также проверяем записи, которые были удалены после lastCheckDate
+                var recentlyDeleted = await _context.Enrollments
+                    .Where(e => e.UserId == userId && e.UpdatedAt > lastCheckDate && e.Status == "cancelled_by_admin")
+                    .Select(e => e.ScheduleId)
+                    .ToListAsync();
+
+                deletedIds.AddRange(recentlyDeleted);
+
+                return Ok(deletedIds.Distinct());
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting deleted schedule ids");
+                return Ok(new List<int>());
+            }
+        }
+        /// <summary>
+        /// Удалить занятие (только для админа) - удаляет записи и отправляет уведомления клиентам
         /// </summary>
         [HttpDelete("{id}")]
         [Authorize(Roles = "admin")]
@@ -796,22 +840,31 @@ namespace Rockstar.API.Controllers
             {
                 var schedule = await _context.Schedules
                     .Include(s => s.Enrollments)
+                        .ThenInclude(e => e.User)
+                    .Include(s => s.Direction)
+                    .Include(s => s.Trainer)
                     .FirstOrDefaultAsync(s => s.Id == id);
 
                 if (schedule == null)
                     return NotFound("Занятие не найдено");
 
-                if (schedule.Enrollments.Any(e => e.Status == "enrolled"))
-                {
-                    return BadRequest("Нельзя удалить занятие, на которое есть активные записи");
-                }
+                var activeEnrollments = schedule.Enrollments.Where(e => e.Status == "enrolled").ToList();
 
+                // Отправляем уведомления клиентам (в мобильном приложении они увидят при следующем открытии)
+                // Для этого просто сохраняем информацию в лог, клиенты сами проверят изменения при загрузке расписания
+
+                _logger.LogInformation($"Deleting schedule {id}. Affected {activeEnrollments.Count} clients. " +
+                                       $"Direction: {schedule.Direction?.Name}, DateTime: {schedule.DateTime}");
+
+                // Удаляем все записи на это занятие
                 _context.Enrollments.RemoveRange(schedule.Enrollments);
+
+                // Удаляем само занятие
                 _context.Schedules.Remove(schedule);
 
                 await _context.SaveChangesAsync();
 
-                return NoContent();
+                return Ok(new { message = "Занятие успешно удалено", affectedClients = activeEnrollments.Count });
             }
             catch (Exception ex)
             {

@@ -254,10 +254,6 @@ namespace Rockstar.API.Services
             var jwtIssuer = _configuration["Jwt:Issuer"] ?? "Rockstar.API";
             var jwtAudience = _configuration["Jwt:Audience"] ?? "Rockstar.Client";
 
-            Debug.WriteLine($"JWT Key used: {jwtKey}");
-            Debug.WriteLine($"JWT Issuer: {jwtIssuer}");
-            Debug.WriteLine($"JWT Audience: {jwtAudience}");
-
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
@@ -273,13 +269,11 @@ namespace Rockstar.API.Services
                 issuer: jwtIssuer,
                 audience: jwtAudience,
                 claims: claims,
-                expires: DateTime.UtcNow.AddHours(24),
+                expires: DateTime.UtcNow.AddDays(30),  
                 signingCredentials: credentials
             );
 
             var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
-            Debug.WriteLine($"Generated token: {tokenString}");
-
             return tokenString;
         }
     }

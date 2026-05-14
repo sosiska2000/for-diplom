@@ -26,7 +26,7 @@
             android:id="@+id/tvDirectionTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Йога"
+            android:text="Направление"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -41,20 +41,10 @@
             android:layout_centerVertical="true"/>
     </RelativeLayout>
 
-    <!-- Прогресс бар -->
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        android:visibility="gone"/>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
-        android:visibility="visible">
+        android:padding="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -103,8 +93,44 @@
                 android:id="@+id/rvSubscriptions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"
-                android:layout_marginBottom="24dp"/>
+                android:nestedScrollingEnabled="false"/>
+
+            <!-- Пометка о покупке в зале -->
+            <LinearLayout
+                android:id="@+id/llSubscriptionInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="#FFF3E0"
+                android:padding="12dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_info"
+                    android:tint="#E65100"
+                    android:layout_marginEnd="12dp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="🏋️ Абонементы можно приобрести только в нашем спортивном клубе. В приложении представлена информация для ознакомления."
+                    android:textSize="12sp"
+                    android:textColor="#E65100"
+                    android:lineSpacingExtra="2dp"/>
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"/>
 
         </LinearLayout>
     </ScrollView>

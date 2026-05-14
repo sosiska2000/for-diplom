@@ -18,6 +18,7 @@ import com.example.rockstarmobile.R;
 import com.example.rockstarmobile.models.AuthResponse;
 import com.example.rockstarmobile.models.RegisterRequest;
 import com.example.rockstarmobile.utils.ApiClient;
+import com.example.rockstarmobile.utils.NameInputFilter;
 import com.example.rockstarmobile.utils.PhoneInputFilter;
 import com.example.rockstarmobile.utils.SessionManager;
 
@@ -68,7 +69,10 @@ public class RegisterActivity extends AppCompatActivity {
         tvLogin = findViewById(R.id.tvLogin);
         progressBar = findViewById(R.id.progressBar);
 
-        // Применяем фильтр для телефона
+        // 👇 ПРИМЕНЯЕМ ФИЛЬТРЫ ДЛЯ ИМЕНИ И ФАМИЛИИ
+        etFirstName.setFilters(new InputFilter[] { new NameInputFilter(true) });
+        etLastName.setFilters(new InputFilter[] { new NameInputFilter(true) });
+
         etPhone.setFilters(new InputFilter[] { new PhoneInputFilter() });
     }
 
@@ -117,19 +121,15 @@ public class RegisterActivity extends AppCompatActivity {
         return age;
     }
 
-    // 👇 НОВЫЙ МЕТОД: валидация и очистка номера телефона
     private String cleanPhoneNumber(String phone) {
         if (TextUtils.isEmpty(phone)) return "";
 
-        // Оставляем только цифры и +
         String cleaned = phone.replaceAll("[^\\d+]", "");
 
-        // Если номер начинается с 8, заменяем на 7
         if (cleaned.startsWith("8") && cleaned.length() == 11) {
             cleaned = "7" + cleaned.substring(1);
         }
 
-        // Если номер без кода страны, добавляем 7
         if (cleaned.startsWith("9") && cleaned.length() == 10) {
             cleaned = "7" + cleaned;
         }
@@ -137,21 +137,17 @@ public class RegisterActivity extends AppCompatActivity {
         return cleaned;
     }
 
-    // 👇 НОВЫЙ МЕТОД: проверка корректности номера телефона
     private boolean isValidPhoneNumber(String phone) {
         String cleaned = cleanPhoneNumber(phone);
 
-        // Номер должен содержать 11 цифр (после очистки)
         if (cleaned.length() != 11) {
             return false;
         }
 
-        // Первая цифра должна быть 7
         if (!cleaned.startsWith("7")) {
             return false;
         }
 
-        // Проверяем, что все символы - цифры
         return cleaned.matches("\\d+");
     }
 
@@ -182,7 +178,6 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        // 👇 ПРОВЕРКА НОМЕРА ТЕЛЕФОНА (запрет букв)
         String phone = cleanPhoneNumber(phoneRaw);
         if (!isValidPhoneNumber(phone)) {
             etPhone.setError("Введите корректный номер телефона (10 или 11 цифр)");

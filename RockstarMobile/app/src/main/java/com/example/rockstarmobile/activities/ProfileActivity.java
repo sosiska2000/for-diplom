@@ -39,6 +39,7 @@ import com.example.rockstarmobile.models.UpdateProfileDto;
 import com.example.rockstarmobile.models.User;
 import com.example.rockstarmobile.models.UserSubscriptionDto;
 import com.example.rockstarmobile.utils.ApiClient;
+import com.example.rockstarmobile.utils.NameInputFilter;
 import com.example.rockstarmobile.utils.PhoneInputFilter;
 import com.example.rockstarmobile.utils.SessionManager;
 
@@ -101,26 +102,7 @@ public class ProfileActivity extends AppCompatActivity {
         checkExpiringSubscriptions();
     }
 
-    private void initViews() {
-        ivBack = findViewById(R.id.ivBack);
-        ivProfilePhoto = findViewById(R.id.ivProfilePhoto);
-        ivEditPhoto = findViewById(R.id.ivEditPhoto);
-        tvEmail = findViewById(R.id.tvEmail);
-        tvAge = findViewById(R.id.tvAge);
-        etFirstName = findViewById(R.id.etFirstName);
-        etLastName = findViewById(R.id.etLastName);
-        etBirthDate = findViewById(R.id.etBirthDate);
-        etPhone = findViewById(R.id.etPhone);
-        btnSave = findViewById(R.id.btnSave);
-        btnChangePassword = findViewById(R.id.btnChangePassword);
-        btnLogout = findViewById(R.id.btnLogout);
-        progressBar = findViewById(R.id.progressBar);
-        rvSubscriptions = findViewById(R.id.rvSubscriptions);
-        llSubscriptionsEmpty = findViewById(R.id.llSubscriptionsEmpty);
 
-        etPhone.setFilters(new InputFilter[] { new PhoneInputFilter() });
-        rvSubscriptions.setLayoutManager(new LinearLayoutManager(this));
-    }
 
     private void setupData() {
         if (currentUser != null) {
@@ -544,7 +526,30 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
+    private void initViews() {
+        ivBack = findViewById(R.id.ivBack);
+        ivProfilePhoto = findViewById(R.id.ivProfilePhoto);
+        ivEditPhoto = findViewById(R.id.ivEditPhoto);
+        tvEmail = findViewById(R.id.tvEmail);
+        tvAge = findViewById(R.id.tvAge);
+        etFirstName = findViewById(R.id.etFirstName);
+        etLastName = findViewById(R.id.etLastName);
+        etBirthDate = findViewById(R.id.etBirthDate);
+        etPhone = findViewById(R.id.etPhone);
+        btnSave = findViewById(R.id.btnSave);
+        btnChangePassword = findViewById(R.id.btnChangePassword);
+        btnLogout = findViewById(R.id.btnLogout);
+        progressBar = findViewById(R.id.progressBar);
+        rvSubscriptions = findViewById(R.id.rvSubscriptions);
+        llSubscriptionsEmpty = findViewById(R.id.llSubscriptionsEmpty);
 
+        // 👇 ПРИМЕНЯЕМ ФИЛЬТРЫ ДЛЯ ИМЕНИ И ФАМИЛИИ
+        etFirstName.setFilters(new InputFilter[] { new NameInputFilter(true) });
+        etLastName.setFilters(new InputFilter[] { new NameInputFilter(true) });
+
+        etPhone.setFilters(new InputFilter[] { new PhoneInputFilter() });
+        rvSubscriptions.setLayoutManager(new LinearLayoutManager(this));
+    }
     private void logout() {
         new AlertDialog.Builder(this)
                 .setTitle("Выход")

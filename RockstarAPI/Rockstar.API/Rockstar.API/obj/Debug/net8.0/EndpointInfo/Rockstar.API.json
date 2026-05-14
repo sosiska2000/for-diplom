@@ -2030,6 +2030,57 @@
         }
       }
     },
+    "/api/Schedule/deleted-schedule-ids": {
+      "get": {
+        "tags": [
+          "Schedule"
+        ],
+        "parameters": [
+          {
+            "name": "lastChecked",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Schedule/{scheduleId}/mark-attendance/{enrollmentId}": {
       "put": {
         "tags": [
@@ -4265,6 +4316,14 @@
             "type": "string",
             "nullable": true
           },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "isCancelledByAdmin": {
+            "type": "boolean"
+          },
           "user": {
             "$ref": "#/components/schemas/User"
           },
@@ -5162,6 +5221,10 @@
             "items": {
               "$ref": "#/components/schemas/SubscriptionPurchase"
             },
+            "nullable": true
+          },
+          "fcmToken": {
+            "type": "string",
             "nullable": true
           }
         },

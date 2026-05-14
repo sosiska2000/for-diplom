@@ -1,6 +1,9 @@
 package com.example.rockstarmobile.models;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class Schedule implements Serializable {
     private int id;
@@ -22,7 +25,7 @@ public class Schedule implements Serializable {
     // Конструктор по умолчанию
     public Schedule() {}
 
-    // Конструктор с параметрами (нужен для MockDataProvider)
+    // Конструктор с параметрами
     public Schedule(int id, String trainerName, String directionName, String serviceName,
                     String dateTime, int durationMinutes, int maxParticipants,
                     int currentParticipants, double price) {
@@ -89,12 +92,12 @@ public class Schedule implements Serializable {
     public String getDateDisplay() {
         if (dateTime == null) return "";
 
-        // Если формат "2026-04-18T10:00:00" (ISO с T)
+        // Формат "2026-04-18T10:00:00" (ISO с T)
         if (dateTime.contains("T")) {
-            return dateTime.split("T")[0];  // Берём только часть до T
+            return dateTime.split("T")[0];
         }
 
-        // Если формат "2026-04-18 10:00:00" (с пробелом)
+        // Формат "2026-04-18 10:00:00" (с пробелом)
         if (dateTime.contains(" ")) {
             return dateTime.split(" ")[0];
         }
@@ -104,6 +107,12 @@ public class Schedule implements Serializable {
 
     public String getTimeDisplay() {
         if (dateTime == null) return "";
+        if (dateTime.contains("T")) {
+            String[] parts = dateTime.split("T");
+            if (parts.length > 1) {
+                return parts[1];
+            }
+        }
         if (dateTime.contains(" ")) {
             String[] parts = dateTime.split(" ");
             if (parts.length > 1) {
@@ -116,6 +125,11 @@ public class Schedule implements Serializable {
     public String getTimeRange() {
         String startTime = getTimeDisplay();
         if (startTime.isEmpty()) return "";
+
+        // Убираем секунды если есть
+        if (startTime.length() > 5) {
+            startTime = startTime.substring(0, 5);
+        }
 
         String[] timeParts = startTime.split(":");
         if (timeParts.length < 2) return startTime;
@@ -130,6 +144,41 @@ public class Schedule implements Serializable {
 
             String endTime = String.format("%02d:%02d", endHours, endMinutes);
             return startTime + " - " + endTime;
+        } catch (NumberFormatException e) {
+            return startTime;
+        }
+    }
+
+    // Получить только время начала
+    public String getStartTime() {
+        String time = getTimeDisplay();
+        if (time.length() > 5) {
+            time = time.substring(0, 5);
+        }
+        return time;
+    }
+
+    // Получить только время окончания
+    public String getEndTime() {
+        String startTime = getTimeDisplay();
+        if (startTime.isEmpty()) return "";
+
+        if (startTime.length() > 5) {
+            startTime = startTime.substring(0, 5);
+        }
+
+        String[] timeParts = startTime.split(":");
+        if (timeParts.length < 2) return startTime;
+
+        try {
+            int hours = Integer.parseInt(timeParts[0]);
+            int minutes = Integer.parseInt(timeParts[1]);
+
+            int totalMinutes = hours * 60 + minutes + durationMinutes;
+            int endHours = (totalMinutes / 60) % 24;
+            int endMinutes = totalMinutes % 60;
+
+            return String.format("%02d:%02d", endHours, endMinutes);
         } catch (NumberFormatException e) {
             return startTime;
         }
@@ -150,4 +199,50 @@ public class Schedule implements Serializable {
     public int getAvailableSpots() {
         return maxParticipants - currentParticipants;
     }
+
+    // Проверка, можно ли отменить запись (не менее 2 часов до начала)
+    public boolean canCancel() {
+        if (dateTime == null) return false;
+
+        try {
+            String cleaned = dateTime.replace("T", " ");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+            Date scheduleDate = sdf.parse(cleaned);
+
+            if (scheduleDate == null) return false;
+
+            Date now = new Date();
+            long diffMs = scheduleDate.getTime() - now.getTime();
+            long diffHours = diffMs / (60 * 60 * 1000);
+
+            return diffHours >= 2;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    // Форматированная дата для отображения
+    public String getFormattedDate() {
+        String dateStr = getDateDisplay();
+        try {
+            String[] parts = dateStr.split("-");
+            if (parts.length == 3) {
+                int year = Integer.parseInt(parts[0]);
+                int month = Integer.parseInt(parts[1]);
+                int day = Integer.parseInt(parts[2]);
+
+                String[] months = {"января", "февраля", "марта", "апреля", "мая", "июня",
+                        "июля", "августа", "сентября", "октября", "ноября", "декабря"};
+
+                return day + " " + months[month - 1] + " " + year;
+            }
+        } catch (Exception e) {
+            return dateStr;
+        }
+        return dateStr;
+    }
+    private boolean cancelledByAdmin;
+
+    public boolean isCancelledByAdmin() { return cancelledByAdmin; }
+    public void setCancelledByAdmin(boolean cancelledByAdmin) { this.cancelledByAdmin = cancelledByAdmin; }
 }

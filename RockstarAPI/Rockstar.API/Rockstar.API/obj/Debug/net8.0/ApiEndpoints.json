@@ -1116,6 +1116,32 @@
   },
   {
     "ContainingType": "Rockstar.API.Controllers.ScheduleController",
+    "Method": "GetDeletedScheduleIds",
+    "RelativePath": "api/Schedule/deleted-schedule-ids",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "lastChecked",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Rockstar.API.Controllers.ScheduleController",
     "Method": "GetByDirection",
     "RelativePath": "api/Schedule/direction/{directionId}",
     "HttpMethod": "GET",

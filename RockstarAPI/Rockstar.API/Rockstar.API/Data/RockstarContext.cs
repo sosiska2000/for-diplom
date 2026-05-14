@@ -17,7 +17,6 @@ namespace Rockstar.API.Data
         public DbSet<Subscription> Subscriptions { get; set; }
         public DbSet<SubscriptionPurchase> Purchases { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
-        public DbSet<RecurringSchedule> RecurringSchedules { get; set; }
         public DbSet<Enrollment> Enrollments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -121,43 +120,6 @@ namespace Rockstar.API.Data
                     .WithMany(d => d.Services)
                     .HasForeignKey(s => s.DirectionId);
             });
-            // ==================== RECURRING SCHEDULES ====================
-            modelBuilder.Entity<RecurringSchedule>(entity =>
-            {
-                entity.ToTable("recurring_schedules");
-                entity.HasKey(e => e.Id);
-
-                entity.Property(e => e.TrainerId).HasColumnName("trainer_id");
-                entity.Property(e => e.DirectionId).HasColumnName("direction_id").IsRequired();
-                entity.Property(e => e.ServiceId).HasColumnName("service_id");
-                entity.Property(e => e.DurationMinutes).HasColumnName("duration_minutes");
-                entity.Property(e => e.MaxParticipants).HasColumnName("max_participants");
-                entity.Property(e => e.Price).HasColumnName("price");
-                entity.Property(e => e.IsGroup).HasColumnName("is_group");
-
-                entity.Property(e => e.Pattern).HasColumnName("pattern").IsRequired();
-                entity.Property(e => e.Interval).HasColumnName("interval");
-                entity.Property(e => e.WeekDays).HasColumnName("week_days");
-                entity.Property(e => e.DayOfMonth).HasColumnName("day_of_month");
-
-                entity.Property(e => e.StartDate).HasColumnName("start_date").IsRequired();
-                entity.Property(e => e.EndDate).HasColumnName("end_date");
-                entity.Property(e => e.MaxOccurrences).HasColumnName("max_occurrences");
-                entity.Property(e => e.IsActive).HasColumnName("is_active");
-                entity.Property(e => e.CreatedAt).HasColumnName("created_at");
-
-                entity.HasOne(r => r.Trainer)
-                    .WithMany()
-                    .HasForeignKey(r => r.TrainerId);
-
-                entity.HasOne(r => r.Direction)
-                    .WithMany()
-                    .HasForeignKey(r => r.DirectionId);
-
-                entity.HasOne(r => r.Service)
-                    .WithMany()
-                    .HasForeignKey(r => r.ServiceId);
-            });
             // ==================== SUBSCRIPTIONS ====================
             modelBuilder.Entity<Subscription>(entity =>
             {
@@ -245,6 +207,9 @@ namespace Rockstar.API.Data
 
                 // Уникальность: пользователь может быть записан на занятие только один раз
                 entity.HasIndex(e => new { e.UserId, e.ScheduleId }).IsUnique();
+                // В конфигурации Enrollment добавьте:
+                entity.Property(e => e.UpdatedAt).HasColumnName("updated_at");
+                entity.Property(e => e.IsCancelledByAdmin).HasColumnName("is_cancelled_by_admin");
             });
         }
     }

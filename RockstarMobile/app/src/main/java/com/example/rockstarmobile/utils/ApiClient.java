@@ -50,6 +50,9 @@ public class ApiClient {
         // ============= АУТЕНТИФИКАЦИЯ =============
         @POST("auth/login")
         Call<AuthResponse> login(@Body LoginRequest loginRequest);
+        // В интерфейсе ApiService добавьте:
+        @GET("schedule/deleted-schedule-ids")
+        Call<List<Integer>> getDeletedScheduleIds(@Query("lastChecked") long lastChecked);
         @GET("users/expiring-subscriptions")
         Call<List<UserSubscriptionDto>> getExpiringSubscriptions(@Query("daysThreshold") int daysThreshold);
         @POST("auth/register")
@@ -61,6 +64,7 @@ public class ApiClient {
         // ============= ПОЛЬЗОВАТЕЛИ =============
         @GET("users/profile")
         Call<User> getProfile();
+        // В интерфейсе ApiService добавьте:
 
         @PUT("users/profile")
         Call<User> updateProfile(@Body UpdateProfileDto dto);

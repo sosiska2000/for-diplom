@@ -3,12 +3,44 @@
   "WorkspaceRootPath": "C:\\Users\\marat\\Desktop\\SportsClub-Rockstar\\RockstarAPI\\Rockstar.API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B2D449A7-A880-4A7C-B360-D0B0ECCFBD8C}|Rockstar.API\\Rockstar.API.csproj|c:\\users\\marat\\desktop\\sportsclub-rockstar\\rockstarapi\\rockstar.api\\rockstar.api\\dtos\\userlistdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B2D449A7-A880-4A7C-B360-D0B0ECCFBD8C}|Rockstar.API\\Rockstar.API.csproj|solutionrelative:rockstar.api\\dtos\\userlistdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B2D449A7-A880-4A7C-B360-D0B0ECCFBD8C}|Rockstar.API\\Rockstar.API.csproj|c:\\users\\marat\\desktop\\sportsclub-rockstar\\rockstarapi\\rockstar.api\\rockstar.api\\data\\rockstarcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2D449A7-A880-4A7C-B360-D0B0ECCFBD8C}|Rockstar.API\\Rockstar.API.csproj|solutionrelative:rockstar.api\\data\\rockstarcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2D449A7-A880-4A7C-B360-D0B0ECCFBD8C}|Rockstar.API\\Rockstar.API.csproj|c:\\users\\marat\\desktop\\sportsclub-rockstar\\rockstarapi\\rockstar.api\\rockstar.api\\models\\enrollment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2D449A7-A880-4A7C-B360-D0B0ECCFBD8C}|Rockstar.API\\Rockstar.API.csproj|solutionrelative:rockstar.api\\models\\enrollment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2D449A7-A880-4A7C-B360-D0B0ECCFBD8C}|Rockstar.API\\Rockstar.API.csproj|c:\\users\\marat\\desktop\\sportsclub-rockstar\\rockstarapi\\rockstar.api\\rockstar.api\\controllers\\schedulecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2D449A7-A880-4A7C-B360-D0B0ECCFBD8C}|Rockstar.API\\Rockstar.API.csproj|solutionrelative:rockstar.api\\controllers\\schedulecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2D449A7-A880-4A7C-B360-D0B0ECCFBD8C}|Rockstar.API\\Rockstar.API.csproj|c:\\users\\marat\\desktop\\sportsclub-rockstar\\rockstarapi\\rockstar.api\\rockstar.api\\models\\schedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2D449A7-A880-4A7C-B360-D0B0ECCFBD8C}|Rockstar.API\\Rockstar.API.csproj|solutionrelative:rockstar.api\\models\\schedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2D449A7-A880-4A7C-B360-D0B0ECCFBD8C}|Rockstar.API\\Rockstar.API.csproj|c:\\users\\marat\\desktop\\sportsclub-rockstar\\rockstarapi\\rockstar.api\\rockstar.api\\controllers\\servicescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2D449A7-A880-4A7C-B360-D0B0ECCFBD8C}|Rockstar.API\\Rockstar.API.csproj|solutionrelative:rockstar.api\\controllers\\servicescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B2D449A7-A880-4A7C-B360-D0B0ECCFBD8C}|Rockstar.API\\Rockstar.API.csproj|c:\\users\\marat\\desktop\\sportsclub-rockstar\\rockstarapi\\rockstar.api\\rockstar.api\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B2D449A7-A880-4A7C-B360-D0B0ECCFBD8C}|Rockstar.API\\Rockstar.API.csproj|solutionrelative:rockstar.api\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2D449A7-A880-4A7C-B360-D0B0ECCFBD8C}|Rockstar.API\\Rockstar.API.csproj|c:\\users\\marat\\desktop\\sportsclub-rockstar\\rockstarapi\\rockstar.api\\rockstar.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{B2D449A7-A880-4A7C-B360-D0B0ECCFBD8C}|Rockstar.API\\Rockstar.API.csproj|solutionrelative:rockstar.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2D449A7-A880-4A7C-B360-D0B0ECCFBD8C}|Rockstar.API\\Rockstar.API.csproj|c:\\users\\marat\\desktop\\sportsclub-rockstar\\rockstarapi\\rockstar.api\\rockstar.api\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2D449A7-A880-4A7C-B360-D0B0ECCFBD8C}|Rockstar.API\\Rockstar.API.csproj|solutionrelative:rockstar.api\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2D449A7-A880-4A7C-B360-D0B0ECCFBD8C}|Rockstar.API\\Rockstar.API.csproj|c:\\users\\marat\\desktop\\sportsclub-rockstar\\rockstarapi\\rockstar.api\\rockstar.api\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2D449A7-A880-4A7C-B360-D0B0ECCFBD8C}|Rockstar.API\\Rockstar.API.csproj|solutionrelative:rockstar.api\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2D449A7-A880-4A7C-B360-D0B0ECCFBD8C}|Rockstar.API\\Rockstar.API.csproj|c:\\users\\marat\\desktop\\sportsclub-rockstar\\rockstarapi\\rockstar.api\\rockstar.api\\dtos\\userlistdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2D449A7-A880-4A7C-B360-D0B0ECCFBD8C}|Rockstar.API\\Rockstar.API.csproj|solutionrelative:rockstar.api\\dtos\\userlistdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +50,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -26,26 +58,130 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Schedule.cs",
+              "DocumentMoniker": "C:\\Users\\marat\\Desktop\\SportsClub-Rockstar\\RockstarAPI\\Rockstar.API\\Rockstar.API\\Models\\Schedule.cs",
+              "RelativeDocumentMoniker": "Rockstar.API\\Models\\Schedule.cs",
+              "ToolTip": "C:\\Users\\marat\\Desktop\\SportsClub-Rockstar\\RockstarAPI\\Rockstar.API\\Rockstar.API\\Models\\Schedule.cs",
+              "RelativeToolTip": "Rockstar.API\\Models\\Schedule.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-14T07:53:50.301Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "RockstarContext.cs",
+              "DocumentMoniker": "C:\\Users\\marat\\Desktop\\SportsClub-Rockstar\\RockstarAPI\\Rockstar.API\\Rockstar.API\\Data\\RockstarContext.cs",
+              "RelativeDocumentMoniker": "Rockstar.API\\Data\\RockstarContext.cs",
+              "ToolTip": "C:\\Users\\marat\\Desktop\\SportsClub-Rockstar\\RockstarAPI\\Rockstar.API\\Rockstar.API\\Data\\RockstarContext.cs",
+              "RelativeToolTip": "Rockstar.API\\Data\\RockstarContext.cs",
+              "ViewState": "AgIAAKwAAAAAAAAAAAAcwL8AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-14T06:51:25.165Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Enrollment.cs",
+              "DocumentMoniker": "C:\\Users\\marat\\Desktop\\SportsClub-Rockstar\\RockstarAPI\\Rockstar.API\\Rockstar.API\\Models\\Enrollment.cs",
+              "RelativeDocumentMoniker": "Rockstar.API\\Models\\Enrollment.cs",
+              "ToolTip": "C:\\Users\\marat\\Desktop\\SportsClub-Rockstar\\RockstarAPI\\Rockstar.API\\Rockstar.API\\Models\\Enrollment.cs",
+              "RelativeToolTip": "Rockstar.API\\Models\\Enrollment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-14T06:51:12.985Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\marat\\Desktop\\SportsClub-Rockstar\\RockstarAPI\\Rockstar.API\\Rockstar.API\\appsettings.json",
+              "RelativeDocumentMoniker": "Rockstar.API\\appsettings.json",
+              "ToolTip": "C:\\Users\\marat\\Desktop\\SportsClub-Rockstar\\RockstarAPI\\Rockstar.API\\Rockstar.API\\appsettings.json",
+              "RelativeToolTip": "Rockstar.API\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-05-14T06:21:13.062Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\marat\\Desktop\\SportsClub-Rockstar\\RockstarAPI\\Rockstar.API\\Rockstar.API\\Models\\User.cs",
+              "RelativeDocumentMoniker": "Rockstar.API\\Models\\User.cs",
+              "ToolTip": "C:\\Users\\marat\\Desktop\\SportsClub-Rockstar\\RockstarAPI\\Rockstar.API\\Rockstar.API\\Models\\User.cs",
+              "RelativeToolTip": "Rockstar.API\\Models\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-14T06:19:51.51Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ScheduleController.cs",
+              "DocumentMoniker": "C:\\Users\\marat\\Desktop\\SportsClub-Rockstar\\RockstarAPI\\Rockstar.API\\Rockstar.API\\Controllers\\ScheduleController.cs",
+              "RelativeDocumentMoniker": "Rockstar.API\\Controllers\\ScheduleController.cs",
+              "ToolTip": "C:\\Users\\marat\\Desktop\\SportsClub-Rockstar\\RockstarAPI\\Rockstar.API\\Rockstar.API\\Controllers\\ScheduleController.cs",
+              "RelativeToolTip": "Rockstar.API\\Controllers\\ScheduleController.cs",
+              "ViewState": "AgIAAAkDAAAAAAAAAAAcwDsDAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-14T06:14:42.687Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "C:\\Users\\marat\\Desktop\\SportsClub-Rockstar\\RockstarAPI\\Rockstar.API\\Rockstar.API\\Services\\AuthService.cs",
+              "RelativeDocumentMoniker": "Rockstar.API\\Services\\AuthService.cs",
+              "ToolTip": "C:\\Users\\marat\\Desktop\\SportsClub-Rockstar\\RockstarAPI\\Rockstar.API\\Rockstar.API\\Services\\AuthService.cs",
+              "RelativeToolTip": "Rockstar.API\\Services\\AuthService.cs",
+              "ViewState": "AgIAAOsAAAAAAAAAAAAAwA8BAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-14T06:05:15.489Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ServicesController.cs",
+              "DocumentMoniker": "C:\\Users\\marat\\Desktop\\SportsClub-Rockstar\\RockstarAPI\\Rockstar.API\\Rockstar.API\\Controllers\\ServicesController.cs",
+              "RelativeDocumentMoniker": "Rockstar.API\\Controllers\\ServicesController.cs",
+              "ToolTip": "C:\\Users\\marat\\Desktop\\SportsClub-Rockstar\\RockstarAPI\\Rockstar.API\\Rockstar.API\\Controllers\\ServicesController.cs",
+              "RelativeToolTip": "Rockstar.API\\Controllers\\ServicesController.cs",
+              "ViewState": "AgIAAEkBAAAAAAAAAAA1wFcBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-14T05:50:43.304Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "UserListDto.cs",
               "DocumentMoniker": "C:\\Users\\marat\\Desktop\\SportsClub-Rockstar\\RockstarAPI\\Rockstar.API\\Rockstar.API\\DTOs\\UserListDto.cs",
               "RelativeDocumentMoniker": "Rockstar.API\\DTOs\\UserListDto.cs",
               "ToolTip": "C:\\Users\\marat\\Desktop\\SportsClub-Rockstar\\RockstarAPI\\Rockstar.API\\Rockstar.API\\DTOs\\UserListDto.cs",
               "RelativeToolTip": "Rockstar.API\\DTOs\\UserListDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-11T19:54:31.402Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "UsersController.cs",
               "DocumentMoniker": "C:\\Users\\marat\\Desktop\\SportsClub-Rockstar\\RockstarAPI\\Rockstar.API\\Rockstar.API\\Controllers\\UsersController.cs",
               "RelativeDocumentMoniker": "Rockstar.API\\Controllers\\UsersController.cs",
               "ToolTip": "C:\\Users\\marat\\Desktop\\SportsClub-Rockstar\\RockstarAPI\\Rockstar.API\\Rockstar.API\\Controllers\\UsersController.cs",
               "RelativeToolTip": "Rockstar.API\\Controllers\\UsersController.cs",
-              "ViewState": "AgIAAAoBAAAAAAAAAAAcwDYBAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAABoCAAAAAAAAAAAIwEwCAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-11T19:54:03.881Z",
               "EditorCaption": ""

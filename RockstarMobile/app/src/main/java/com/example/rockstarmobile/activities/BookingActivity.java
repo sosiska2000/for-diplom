@@ -122,6 +122,48 @@ public class BookingActivity extends AppCompatActivity {
             }
         });
     }
+    // В BookingActivity добавьте обработчик для btnCancel
+    private void setupListeners() {
+        ivBack.setOnClickListener(v -> finish());
+        btnBook.setOnClickListener(v -> showConfirmationDialog());
+        btnCancel.setOnClickListener(v -> cancelBooking());  // 👈 ДОБАВЬТЕ
+    }
+
+    private void cancelBooking() {
+        new AlertDialog.Builder(this)
+                .setTitle("Отмена записи")
+                .setMessage("Вы уверены, что хотите отменить запись на занятие?")
+                .setPositiveButton("Отменить", (dialog, which) -> performCancel())
+                .setNegativeButton("Оставить", null)
+                .show();
+    }
+
+    private void performCancel() {
+        progressBar.setVisibility(View.VISIBLE);
+
+        apiClient.getApiService().cancelEnrollment(currentSchedule.getId()).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                progressBar.setVisibility(View.GONE);
+
+                if (response.isSuccessful()) {
+                    Toast.makeText(BookingActivity.this,
+                            "Запись отменена!", Toast.LENGTH_LONG).show();
+                    finish();
+                } else {
+                    Toast.makeText(BookingActivity.this,
+                            "Ошибка отмены записи", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
+                Toast.makeText(BookingActivity.this,
+                        "Ошибка сети: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 
     // 👇 НОВЫЙ МЕТОД: проверка подходящего абонемента
     private void checkApplicableSubscription() {
@@ -161,11 +203,6 @@ public class BookingActivity extends AppCompatActivity {
         }
     }
 
-    private void setupListeners() {
-        ivBack.setOnClickListener(v -> finish());
-        btnBook.setOnClickListener(v -> showConfirmationDialog());
-        btnCancel.setOnClickListener(v -> finish());
-    }
 
     private void showConfirmationDialog() {
         String message;

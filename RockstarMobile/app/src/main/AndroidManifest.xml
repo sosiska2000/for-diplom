@@ -6,7 +6,10 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.VIBRATE" />
-
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -32,6 +35,7 @@
         <activity android:name=".activities.TrainersActivity" />
         <activity android:name=".activities.ProfileActivity" />
         <activity android:name=".activities.BookingActivity" />
-
+        <activity android:name=".activities.CatalogActivity"/>
+        <activity android:name=".activities.DirectionDetailActivity"/>
     </application>
 </manifest>

@@ -66,8 +66,9 @@ public class Subscription implements Serializable {
         return sessionsCount > 1 ? sessionsCount + " занятий" : "Разовое";
     }
 
+    // 👇 ИСПРАВЛЕННЫЙ МЕТОД - используем directionName
     public String getDirectionDisplay() {
-        return directionName != null ? directionName : "Без направления";
+        return directionName != null && !directionName.isEmpty() ? directionName : "Без направления";
     }
 
     public String getDirectionColor() {

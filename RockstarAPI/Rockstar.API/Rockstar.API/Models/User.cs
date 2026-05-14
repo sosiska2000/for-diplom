@@ -19,5 +19,6 @@ namespace Rockstar.API.Models
         public DateTime? UpdatedAt { get; set; }
         public ICollection<Enrollment> Enrollments { get; set; } = new List<Enrollment>();
         public ICollection<SubscriptionPurchase> Purchases { get; set; } = new List<SubscriptionPurchase>();
+        public string? FcmToken { get; set; }
     }
 }
